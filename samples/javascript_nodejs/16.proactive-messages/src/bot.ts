@@ -1,11 +1,14 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const { ActivityTypes, TurnContext } = require('botbuilder');
+import { ActivityTypes, TurnContext, BotState, BotFrameworkAdapter, StatePropertyAccessor } from 'botbuilder';
 
 const JOBS_LIST = 'jobs';
 
-class ProactiveBot {
+export class ProactiveBot {
+    public botState: BotState;
+    public adapter: BotFrameworkAdapter;
+    public jobsList;
     /**
      *
      * @param {BotState} botState A BotState object used to store information for the bot independent of user or conversation.
@@ -77,7 +80,7 @@ class ProactiveBot {
         try {
             if (isEmpty(jobInfo)) {
                 // Job object is empty so we have to create it
-                await turnContext.sendActivity(`Need to create new job ID: ${ jobIdNumber }`);
+                await turnContext.sendActivity(`We need to create new job ID: ${ jobIdNumber }`);
 
                 // Update jobInfo with new info
                 jobs[jobIdNumber] = { completed: false, reference: reference };
@@ -158,5 +161,3 @@ function isEmpty(obj) {
     }
     return true;
 };
-
-module.exports.ProactiveBot = ProactiveBot;

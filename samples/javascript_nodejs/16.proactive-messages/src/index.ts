@@ -1,19 +1,20 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const restify = require('restify');
-const path = require('path');
+import * as restify from 'restify';
+import * as path from 'path';
+import { config } from 'dotenv';
 
 // Import required bot services. See https://aka.ms/bot-services to learn more about the different part of a bot.
-const { BotFrameworkAdapter, BotState, MemoryStorage } = require('botbuilder');
-const { BotConfiguration } = require('botframework-config');
+import { BotFrameworkAdapter, BotState, MemoryStorage }  from 'botbuilder';
+import { BotConfiguration } from 'botframework-config';
 
-const { ProactiveBot } = require('./bot');
+import { ProactiveBot } from './bot';
 
 // Read botFilePath and botFileSecret from .env file.
 // Note: Ensure you have a .env file and include botFilePath and botFileSecret.
-const ENV_FILE = path.join(__dirname, '.env');
-require('dotenv').config({ path: ENV_FILE });
+const ENV_FILE = path.join(__dirname, '..', '.env');
+const env = config({ path: ENV_FILE });
 
 // Create HTTP server.
 let server = restify.createServer();
@@ -24,7 +25,7 @@ server.listen(process.env.port || process.env.PORT || 3978, function() {
 });
 
 // .bot file path
-const BOT_FILE = path.join(__dirname, (process.env.botFilePath || ''));
+const BOT_FILE = path.join(__dirname, '..', (process.env.botFilePath || ''));
 
 // Read the bot's configuration from a .bot file identified by BOT_FILE.
 // This includes information about the bot's endpoints and configuration.
@@ -59,7 +60,7 @@ const adapter = new BotFrameworkAdapter({
 const memoryStorage = new MemoryStorage();
 
 // Create state manager with in-memory storage provider.
-const botState = new BotState(memoryStorage, () => 'proactiveBot.botState');
+const botState = new BotState(memoryStorage, () => Promise.resolve('proactiveBot.botState'));
 
 // CAUTION: You must ensure your product environment has the NODE_ENV set
 //          to use the Azure Blob storage or Azure Cosmos DB providers.

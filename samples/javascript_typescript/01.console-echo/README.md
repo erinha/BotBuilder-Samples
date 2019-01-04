@@ -1,4 +1,14 @@
+# console echo sample
+Bot Framework v4 console bot sample
+
 This sample shows how to create a simple echo bot that you can talk to from the console window.
+
+## Prerequisites
+- [Node.js][4] version 8.5 or higher
+    ```bash
+    # determine node version
+    node --version
+    ```
 
 # To try this sample
 - Clone the repository
@@ -9,17 +19,14 @@ This sample shows how to create a simple echo bot that you can talk to from the 
     ```bash
     cd samples/javascript_typescript/01.console-echo
     ```
-- Install modules and start the bot
+- Install modules
     ```bash
-    npm i && npm start
+    npm install
     ```
-
-## Prerequisite
-### Install TypeScript
-In order to run this sample, you must have TypeScript installed.  To install TypeScript:
-- Navigate to the [TypeScript portal](https://www.typescriptlang.org).
-- Click the [Download](https://www.typescriptlang.org/#download-links) button.
-- Follow the installation instructions for your development environment.
+- Start the bot
+    ```bash
+    npm start
+    ```
 
 # Testing the bot
 After running `npm start`, the bot presents a prompt directly in the console window.

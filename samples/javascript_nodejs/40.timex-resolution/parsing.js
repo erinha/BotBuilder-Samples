@@ -11,34 +11,27 @@ const { TimexProperty } = require('@microsoft/recognizers-text-data-types-timex-
 // inferred type datetime (its still a date).
 // Logic can be written against the inferred type, perhaps to have the bot ask the user for disamiguation.
 
-const describe = function(t) {
+const describe = ({ timex, types }) => {
+    const messages = [timex];
 
-    var msg = `${t.timex} `;
-
-    if (t.types.has('date'))
-    {
-        if (t.types.has('definite'))
-        {
-            msg = msg.concat('We have a definite calendar date. ');
-        }
-        else
-        {
-            msg = msg.concat('We have a date but there is some ambiguity. ');
+    if (types.has('date')) {
+        if (types.has('definite')) {
+            messages.push('We have a definite calendar date.');
+        } else {
+            messages.push('We have a date but there is some ambiguity.');
         }
     }
 
-    if (t.types.has('time'))
-    {
-        msg = msg.concat('We have a time.');
+    if (types.has('time')) {
+        messages.push('We have a time.');
     }
 
-    console.log(msg);
-}
+    console.log(messages.join(' '));
+};
 
-module.exports.examples = function () {
-
+module.exports.examples = () => {
     describe(new TimexProperty('2017-05-29'));
     describe(new TimexProperty('XXXX-WXX-6'));
     describe(new TimexProperty('XXXX-WXX-6T16'));
     describe(new TimexProperty('T12'));
-}
+};

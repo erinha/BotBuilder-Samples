@@ -1,29 +1,30 @@
 # <%= botname %>
 <%= description %>
 
-This bot has been created using [Microsoft Bot Framework][1].
+This bot has been created using [Bot Framework][1].
 
 ## Prerequisites
-- [Node.js][4]
-Ensure [Node.js][4] version 8.5 or higher installed.  To determine if Node.js is installed run the following from a shell window.
+- [Node.js][4] version 8.5 or higher
+
 ```bash
+# determine node version
 node --version
 ```
 
 # To run the bot
-- Install modules and start the bot.
-```bash
-npm i && npm start
-```
-Alternatively you can also run the watch script which will reload the bot when source code changes are detected.
-```bash
-npm i && npm run watch
-```
+- Install modules
+    ```bash
+    npm install
+    ```
+- Start the bot
+    ```bash
+    npm start
+    ```
 
 # Testing the bot using Bot Framework Emulator **v4**
-[Microsoft Bot Framework Emulator][5] is a desktop application that allows bot developers to test and debug their bots on localhost or running remotely through a tunnel.
+[Bot Framework Emulator][5] is a desktop application that allows bot developers to test and debug their bots on localhost or running remotely through a tunnel.
 
-- Install the Bot Framework Emulator version 4.1.0 or greater from [here][6]
+- Install the Bot Framework Emulator version 4.2.0 or greater from [here][6]
 
 ## Connect to the bot using Bot Framework Emulator **v4**
 - Launch Bot Framework Emulator
@@ -31,11 +32,17 @@ npm i && npm run watch
 - Navigate to `<%= botname %>` folder
 - Select `<%= botname %>.bot` file
 
+# Deploy the bot to Azure
+This bot was generated using the Empty bot template.  Unmodified, it's not practical to deploy an empty bot to Azure, as it doesn't have any conversational behavior yet.
+After making modifications to the bot and testing it locally, you can deploy it to Azure to make it accessible from anywhere.
+To learn how, see [Deploy your bot to Azure][40] for a complete set of deployment instructions.
+
 # Further reading
 - [Bot Framework Documentation][20]
 - [Bot Basics][32]
 - [Azure Bot Service Introduction][21]
 - [Azure Bot Service Documentation][22]
+- [Deploy Your Bot to Azure][40]
 - [Azure CLI][7]
 - [msbot CLI][9]
 - [Azure Portal][10]
@@ -52,9 +59,11 @@ npm i && npm run watch
 [8]: https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest
 [9]: https://github.com/Microsoft/botbuilder-tools/tree/master/packages/MSBot
 [10]: https://portal.azure.com
-[11]: https://luis.ai
+[11]: https://www.luis.ai
 [20]: https://docs.botframework.com
 [21]: https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0
 [22]: https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0
 [30]: https://www.npmjs.com/package/restify
 [32]: https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0
+[40]: https://aka.ms/azuredeployment
+[41]: ./PREREQUISITES.md

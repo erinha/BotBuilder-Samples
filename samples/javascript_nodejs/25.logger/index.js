@@ -7,7 +7,12 @@ const fs = require('fs');
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const { BotFrameworkAdapter, MemoryStorage, UserState, ConversationState, TranscriptLoggerMiddleware } = require('botbuilder');
+const {
+    BotFrameworkAdapter,
+    ConversationState,
+    MemoryStorage,
+    TranscriptLoggerMiddleware,
+    UserState } = require('botbuilder');
 const { CustomLogger } = require('./CustomLogger');
 // Import required bot configuration.
 const { BotConfiguration } = require('botframework-config');
@@ -104,10 +109,7 @@ adapter.onTurnError = async (context, error) => {
     // Send a message to the user
     await context.sendActivity(`Oops. Something went wrong!`);
     // Clear out state
-    await conversationState.load(context);
-    await conversationState.clear(context);
-    // Save state changes.
-    await conversationState.saveChanges(context);
+    await conversationState.delete(context);
 };
 
 // Listen for incoming requests.

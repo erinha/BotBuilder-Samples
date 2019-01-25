@@ -52,9 +52,11 @@
     ],
     "actions": [
       {
-        "type": "Action.OpenUrl",
-        "title": "More Info",
-        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        "type": "Action.Submit",
+        "title": "Send bot done",
+        "data": {
+          "x": "done"
+        }
       }
     ]
   }

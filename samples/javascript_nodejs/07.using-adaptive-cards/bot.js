@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const { CardFactory } = require('botbuilder');
+const { ActionTypes, CardFactory, MessageFactory } = require('botbuilder');
 
 // Import AdaptiveCard content.
 const FlightItineraryCard = require('./resources/FlightItineraryCard.json');
@@ -32,11 +32,42 @@ class AdaptiveCardsBot {
     async onTurn(context) {
         // See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
         if (context.activity.type === 'message') {
-            const randomlySelectedCard = CARDS[Math.floor((Math.random() * CARDS.length - 1) + 1)];
+            // const randomlySelectedCard = CARDS[Math.floor((Math.random() * CARDS.length - 1) + 1)];
+            const randomlySelectedCard = CARDS[3];
             await context.sendActivity({
                 text: 'Here is an Adaptive Card:',
                 attachments: [CardFactory.adaptiveCard(randomlySelectedCard)]
             });
+
+            const hero = MessageFactory.attachment(
+                CardFactory.heroCard(
+                    'Holler Back Buttons',
+                    ['https://example.com/whiteShirt.jpg'],
+                    [{
+                        type: ActionTypes.ImBack,
+                        title: 'ImBack',
+                        value: 'You can ALL hear me! Should Out Loud',
+                    },
+                    {
+                        type: ActionTypes.PostBack,
+                        title: 'PostBack',
+                        value: 'Shh! My Bot Friend hears me. Much Quieter',
+                    },
+                    {
+                        type: ActionTypes.OpenUrl,
+                        title: 'OpenUrl',
+                        value: 'https://en.wikipedia.org/wiki/{cardContent.Key}',
+                    }]
+                )
+            );
+            await context.sendActivity(hero);
+
+            if (context.responded) {
+                if (context.activity.value) {
+                    await context.sendActivity(`You submitted ${context.activity.value.x}`);
+                }
+                await context.sendActivity(`You said ${context.activity.text}`);
+            }
         } else {
             await context.sendActivity(`[${ context.activity.type } event detected]`);
         }

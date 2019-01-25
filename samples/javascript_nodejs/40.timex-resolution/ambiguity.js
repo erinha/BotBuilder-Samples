@@ -61,6 +61,7 @@ module.exports.timeAmbiguity = () => {
 };
 
 module.exports.dateTimeAmbiguity = () => {
+    console.log(`Running input: "It will be ready Wednesday at 5 o'clock."`);
     // Run the recognizer.
     const result = Recognizers.recognizeDateTime("It will be ready Wednesday at 5 o'clock.", Recognizers.Culture.English);
 
@@ -79,4 +80,9 @@ module.exports.dateTimeAmbiguity = () => {
         // TIMEX expressions don't capture time ambiguity so there will be two distinct expressions for each result.
         console.log(`${ result.text } ( ${ Array.from(distinctTimexExpressions).join(',') } )`);
     });
+};
+
+module.exports.timeZone = () => {
+    let options = Intl.DateTimeFormat().resolvedOptions();
+    console.log(`Time zone: ${Intl.DateTimeFormat().resolvedOptions().timeZone}`);
 };

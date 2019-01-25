@@ -8,6 +8,7 @@ const languageGeneration = require('./languageGeneration.js');
 const parsing = require('./parsing.js');
 const ranges = require('./ranges.js');
 const resolution = require('./resolution.js');
+const timezone = require('./timezone.js');
 
 // Creating TIMEX expressions from natural language using the Recognizer package.
 ambiguity.dateAmbiguity();
@@ -21,3 +22,6 @@ parsing.examples();
 languageGeneration.examples();
 resolution.examples();
 constraints.examples();
+
+timezone.timezoneMoment();
+
